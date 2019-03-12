@@ -1,0 +1,76 @@
+---
+layout: default
+---
+<div class="container">
+
+  
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+ <div class="card shadow-sm">
+  <header class="post-header">
+
+
+
+		{% assign yt = page.content | split:"[ytb "%}      
+                {% assign htm = yt[1] | split:"]</code>" | first %}
+                {% assign thesize = htm.size %}
+                {% if htm and thesize == 11 %}
+                {% include youtubeplayer.html id=htm %}
+                {% endif %}
+                {% unless htm or thesize == 11 %}
+                {% assign image = page.content | split:"<img " %}
+                {% assign html = image[1] | split:"/>" | first %}
+                {% if html and html != "" %}
+                <img class="card-img-top" {{ html }} />
+                {% endif %}
+                {% endunless %}
+		
+
+
+<div class="card-body">
+
+    <h4 class="card-title text-center" itemprop="name headline">{{ page.title }}</h4>
+        <div class="text-center">
+    <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook"><img src="{{ site.url }}/images/facebook.png" alt="facebook"></a>
+    <a href="whatsapp://send?text={{ site.url }}{{ page.url }}" data-action="share/whatsapp/share"><img src="{{ site.url }}/images/whatsapp.png" alt="whatsapp"></a>
+    <button class="btn btn-info shadow-sm my-2 my-sm-0 share-btn5 d-lg-none" type="submit" value="submit">More</button>
+</div>
+
+<div class="byline text-center"><span><i class="fa fa-calendar"></i> <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span><i class="fas fa-pencil-alt" aria-hidden="true"></i> {% if site.author %}<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ site.author }}</span></span>{% endif %}</span>
+</div>
+</div>
+  </header>
+
+  <div class="post-content post-content1" itemprop="articleBody">
+    {{ content }}
+  </div>
+ 
+ 
+{% include fb-comment.html %}
+
+    </div>
+</article>
+
+
+
+
+</div>
+
+<script>
+  document.querySelector('.share-btn5').addEventListener('click', function() {
+    console.log('clicked');
+    var textt = `{{ page.content }}`;      
+      const text = textt.replace(/<\/?[^>]+(>|$)/g, "");
+      const title = '{{ page.title }}';
+      const url = '{{ site.url }}{{ page.url }}';
+    if(navigator.share) {  
+      navigator.share({
+        title,
+        text,
+        url
+      })
+      .then(() => console.log('Success'))
+      .catch((error) => console.log('Error sharing', error));
+    }
+  });
+</script>
+

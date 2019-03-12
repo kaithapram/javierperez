@@ -1,0 +1,41 @@
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#17a2b8" />
+  
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}" />
+  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+  <link href="{{ '/css/fontawesome-all.min.css' | prepend: site.baseurl }}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/css/main.css' | prepend: site.baseurl }}" />
+  <link href="{{ '/css/font.css' | prepend: site.baseurl }}" rel='stylesheet' type='text/css' />
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.url}}" />
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.url}}" />
+  <link href="{{'/css/ekko-lightbox.css' | prepend: site.baseurl}}" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/ico" href="{{ '/favicon.ico' | prepend: site.baseurl }}"/>
+  <script src="{{'/bs/assets/javascripts/jquery.min.js' | prepend: site.baseurl}}"></script>
+  <script src="{{'/bs/assets/javascripts/umd/popper.min.js' | prepend: site.baseurl}}"></script>
+  <script src="{{'/bs/assets/javascripts/bootstrap.min.js' | prepend: site.baseurl}}"></script>
+  <script src="{{'/bs/assets/javascripts/ekko-lightbox.js' | prepend: site.baseurl}}"></script>
+  <script type="text/javascript">
+	$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+  </script> 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  {% assign thesiz = site.google_adsense.size %}
+  {% if site.google_adsense and thesiz == 23 %}
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "{{ site.google_adsense }}",
+      enable_page_level_ads: true
+    });
+  </script>
+  {% endif %}
+  {% if jekyll.environment == 'production' and site.google_analytics %}
+  {% include google-analytics.html %}
+  {% endif %}
+</head>

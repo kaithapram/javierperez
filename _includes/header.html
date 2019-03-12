@@ -1,0 +1,28 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+      <a class="navbar-brand" href="{{ site.url }}/">{{ site.title }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ site.url }}/">Home</a>
+          </li>         
+          <li class="nav-item">
+            <a class="nav-link" href="{{ site.url }}/about">About</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="get" action="https://www.google.com/search" target="google_window">
+<input class="form-control mr-sm-2" type="text" name="q" size="20" maxlength="255" value=" Google search..." onfocus="if(this.value==' Google search...')this.value=''" onblur="if(this.value=='')this.value=' Google search...'"/>
+<button class="btn btn-info shadow-sm my-2 my-sm-0" type="submit" name="sa" value="Search">Search</button>
+<input type="hidden" name="sitesearch" value="{{ site.url }}" checked="checked">
+</form>&nbsp;
+        <form class="form-inline my-2 my-lg-0" method="get" action="{{site.baseurl}}/search2/">
+          <input class="form-control mr-sm-2" id="search-box" type="search" placeholder="Search" aria-label="Search" name="query">
+          <button class="btn btn-info shadow-sm my-2 my-sm-0" type="submit" value="Search">Search</button>
+        </form>
+      </div>
+    </nav>
+</header>
